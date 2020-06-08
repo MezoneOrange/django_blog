@@ -1,0 +1,18 @@
+{% extends 'services/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block site_title %}Авторизация{% endblock site_title %}
+
+{% block center %}
+    <div class="container reg">
+        <form method="POST" class="d-flex flex-column">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" name="button" class="btn btn-outline-success btn-lg align-self-end">Войти</button>
+        </form>
+        <hr>
+        <div>
+            Забыли пароль? <a href="{% url 'password_reset' %}">Получить новый</a>
+        </div>
+    </div>
+{% endblock center %}

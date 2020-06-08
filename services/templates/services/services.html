@@ -1,0 +1,27 @@
+{% extends 'services/index.html' %}
+
+{% block site_title %}{{ title }}{% endblock site_title %}
+
+{% block center %}
+<div class="main_section services container ">
+    <div class="row justify-content-center">
+        <h1 class="text-center">Страница с услугами</h1>
+    </div>
+    <div class="row justify-content-around mt-5 ">
+
+    {% if items|length %}
+        {% for item in items %}
+            <div class="services_block text-center mb-5">
+                <h3>{{ item.head }}</h3>
+                <p>{{ item.text }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+            <div class="services_block text-center mb-5">
+                <h3>Ничего не обещяем</h3>
+
+            </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock center %}

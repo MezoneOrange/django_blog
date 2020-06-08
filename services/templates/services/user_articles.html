@@ -1,0 +1,68 @@
+{% extends 'services/index.html' %}
+
+{% block site_title %}{{ title }}{% endblock site_title %}
+
+{% block center %}
+<div class="main_section container reg">
+    <div class="rowflex-column p-5">
+        <h2>Все статьи от автора {{ view.kwargs.username }}</h2>
+        <h4>Количество: {{ page_obj.paginator.count }}</h4>
+    </div>
+
+
+    {% if articles|length %}
+        {% for article in articles %}
+        <div class="mt-5 mb-4 p-5 news">
+            <div class="row mb-5 justify-content-center">
+                <h3>{{ article.title }}</h3>
+            </div>
+            <div class="row text-justify mb-5">
+                <p>{{ article.text|striptags|truncatechars:300 }}</p>
+            </div>
+            <div class="row d-flex justify-content-between">
+                <div class="row d-flex flex-row">
+                    <img src="{{ article.author.profile.image.url }}" alt="{{ article.author }}" class="user_image">
+                    <div>
+                        <p><small>Автор: <a href="{% url 'articles-user' article.author %}">{{ article.author }}</a></small></p>
+                        <p class="text-muted"><small>Дата: {{ article.date|date:"d E Y в H:i:s" }}</small></p>
+                    </div>
+
+                </div>
+                <div class="row align-self-center">
+                    <a href="{% url 'article-detail' article.id %}" class="btn btn-outline-success">Читать далее</a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="row justify-content-center mt-5 mb-4">
+            <div class="mb-5">
+                <h3>Ничего нет</h3>
+
+            </div>
+        </div>
+    {% endif %}
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="btn btn-outline-success"><<</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-success"><</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+                <button class="btn btn-success">{{ num }}</button>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a href="?page={{ num }}" class="btn btn-outline-success">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-success">></a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-success">>></a>
+        {% endif %}
+    {% endif %}
+    </div>
+</div>
+{% endblock center %}

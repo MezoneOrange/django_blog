@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Домашняя работа к блоку №15-Django Часть 1">
+    <meta name="author" content="Дмитрий Шелухин">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'services/css/main.css' %}">
+    <title>{% block site_title %}{% endblock site_title %}</title>
+</head>
+<body>
+    <!-- header -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'services-main' %}">Simpy</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarsExample02">
+                <ul class="navbar-nav " id="nav_links">
+                    <li class="nav-item">
+                        <a class="nav-link mt-1 mb-1" href="{% url 'services-current' %}" id="link_1">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mt-1 mb-1" href="{% url 'articles' %}" id="link_2">Статьи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mt-1 mb-1" href="{% url 'services-feedback' %}" id="link_3">Обратная связь</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary ml-2 mt-1 mb-1" href="{% url 'article-create' %}" id="link_4">Создать статью</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary ml-2 mt-1 mb-1" href="{% url 'services-profile' %}" id="link_4">Профиль</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary ml-2 mt-1 mb-1" href="{% url 'services-exit' %}" id="link_5">Выйти</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary ml-2 mt-1 mb-1" href="{% url 'services-auth' %}" id="link_4">Войти</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary ml-2 mt-1 mb-1" href="{% url 'services-reg' %}" id="link_5">Регистрация</a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+
+            </div>
+    </nav>
+    <div class="container-fluid" id="main_field">
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+
+        {% block center %}
+
+        {% endblock center %}
+    </div>
+
+
+    <!-- footer -->
+    <div class="container-fluid bg-dark p-4 text-center">
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p class="text-white">Все права защищены&copy;</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{% static 'services/js/index.js' %}"></script>
+</body>
+</html>

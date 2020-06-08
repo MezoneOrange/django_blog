@@ -1,0 +1,13 @@
+{% extends 'services/index.html' %}
+
+{% block site_title %}{{ title }}{% endblock site_title %}
+
+{% block center %}
+    <div class="container reg">
+        <h3>Вы успешно вышли из учетной записи.</h3>
+        <hr>
+        <div>
+            <a href="{% url 'services-auth' %}">Войти в учетную запись</a>
+        </div>
+    </div>
+{% endblock center %}

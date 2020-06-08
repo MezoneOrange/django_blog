@@ -1,0 +1,12 @@
+{% extends 'services/index.html' %}
+
+{% block site_title %}{{ title }}{% endblock site_title %}
+
+{% block center %}
+<div class="main_section main container text-center">
+    <h1>Простой и удобный сервис</h1>
+    <p>Делаем работу быстро и качественно</p>
+    <a class="btn btn-danger" href="{% url 'services-current' %}">Посмотреть услуги</a>
+</div>
+
+{% endblock center %}

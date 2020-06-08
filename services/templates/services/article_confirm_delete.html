@@ -1,0 +1,15 @@
+{% extends 'services/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block site_title %}{{ title }}{% endblock site_title %}
+
+{% block center %}
+    <div class="container reg">
+        <h2 class="text-center">Вы уверены?</h2>
+        <form method="POST" class="d-flex justify-content-center">
+            {% csrf_token %}
+            <button type="submit" name="button" class="btn btn-danger btn-lg">Да</button>
+            <a href="{% url 'articles' %}" class="btn btn-success btn-lg ml-5">Нет</a>
+        </form>
+    </div>
+{% endblock center %}
