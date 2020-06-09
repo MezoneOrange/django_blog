@@ -1,5 +1,5 @@
 # Website with users articles  
-###### First django project from "Python developer" course in programming school "IT technologies itProger"  
+###### First django project from "Python developer" course in programming school "IT technologies itProger" https://itproger.com  
 
 ## In the site realised blog with users articles:  
 
